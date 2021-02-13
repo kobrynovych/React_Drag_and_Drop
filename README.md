@@ -1,6 +1,7 @@
 # React_Drag_and_Drop
 
-...
+Drag and Drop...
+
 Demo
 https://igorkob.github.io/React_Drag_and_Drop
 
@@ -28,10 +29,13 @@ $ npm start # or yarn start
 ```
 
 ## Description
-...
+This is a simple react app using public [`React Beautiful dnd`](https://github.com/atlassian/react-beautiful-dnd).
+This is a simple react app using public [`React window`](https://www.npmjs.com/package/react-window).
 
 
 ## Technologies
 Project uses:
-* React 
-...
+* React (useState, useLayoutEffect, useRef, React.memo)
+* React-beautiful-dnd"
+* React-window
+* Material-ui

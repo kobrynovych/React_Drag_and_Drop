@@ -1,256 +1,9 @@
-import React, { useState, useLayoutEffect, useRef } from "react";
-import { FixedSizeList, areEqual } from "react-window";
-import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import React, { useState } from "react";
+import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import getInitialData from "./components/get-initial-data";
 import { reorderList } from "./components/reorder";
 import './App.css';
-import img from './images/p1.jpg'
-import { ListManager } from "react-beautiful-dnd-grid";
-import { FixedSizeList as List } from "react-window";
-import AutoSizer from "react-virtualized-auto-sizer";
-
-import { makeStyles } from '@material-ui/core/styles';
-import ListSubheader from '@material-ui/core/ListSubheader';
-import ListMaterialUI from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import Collapse from '@material-ui/core/Collapse';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import DraftsIcon from '@material-ui/icons/Drafts';
-import SendIcon from '@material-ui/icons/Send';
-import ExpandLess from '@material-ui/icons/ExpandLess';
-import ExpandMore from '@material-ui/icons/ExpandMore';
-import StarBorder from '@material-ui/icons/StarBorder';
-
-import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
-import Avatar from '@material-ui/core/Avatar';            // img
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    width: '100%',
-    maxWidth: 360,
-    backgroundColor: theme.palette.background.paper,
-    display: 'flex',
-    '& > *': {
-      margin: theme.spacing(1),
-    },
-  },
-  column: {
-    margin: '1px',
-  },
-  title__wrap: {
-    border: '1px solid #ccc',
-    // textOverflow: 'ellipsis',
-    // visibility: 'hidden',
-  },
-  title: {
-    textTransform: 'uppercase',
-    whiteSpace: 'nowrap',
-    overflow: 'hidden',
-    textOverflow: 'ellipsis',
-    // paddingLeft: theme.spacing(4),
-  },
-  icon: {
-    minWidth: '33px',
-  },
-  // small: {                     // img avatar
-  //   width: theme.spacing(3),
-  //   height: theme.spacing(3),
-  // },
-  ItemList_wrap: {
-    backgroundColor: '#ccc',
-    paddingTop: '3px',          // dont work only (+ItemList_wrap2)
-  },
-  ItemList_wrap2: {      
-    // paddingTop: '3px',
-    padding: '3px',
-  },
-}));
-
-function getStyle({ draggableStyle, virtualStyle, isDragging }) {
-  // If you don't want any spacing between your items
-  // then you could just return this.
-  // I do a little bit of magic to have some nice visual space
-  // between the row items
-  const combined = {
-    ...virtualStyle,
-    ...draggableStyle
-  };
-
-  // Being lazy: this is defined in our css file
-  const grid = 8;
-
-  // when dragging we want to use the draggable style for placement, otherwise use the virtual style
-  const result = {
-    ...combined,
-    height: isDragging ? combined.height : combined.height - grid,
-    left: isDragging ? combined.left : combined.left + grid,
-    width: isDragging
-      ? draggableStyle.width
-      : `calc(${combined.width} - ${grid * 2}px)`,
-    marginBottom: grid,
-    backgroundColor: '#aaa',
-  };
-
-  return result;
-}
-
-function Item({ provided, item, style, isDragging }) {
-  return (
-    // <div
-    //   {...provided.draggableProps}
-    //   {...provided.dragHandleProps}
-    //   ref={provided.innerRef}
-    //   style={getStyle({
-    //     draggableStyle: provided.draggableProps.style,
-    //     virtualStyle: style,
-    //     isDragging
-    //   })}
-    //   className={`item ${isDragging ? "is-dragging" : ""}`}
-    // >
-    //   {item.name}
-    // </div>
-      <ListItem button divider 
-        {...provided.draggableProps}
-        {...provided.dragHandleProps}
-        ref={provided.innerRef}
-        style={getStyle({
-          draggableStyle: provided.draggableProps.style,
-          virtualStyle: style,
-          isDragging
-        })}
-      className={`item ${isDragging ? "is-dragging" : ""}`}
-      >
-        <ListItemText primary={item.name} />
-      </ListItem>
-  );
-}
-
-// Recommended react-window performance optimisation: memoize the row render function
-// Things are still pretty fast without this, but I am a sucker for making things faster
-const Row = React.memo(function Row(props) {
-  const { data: items, index, style } = props;
-  const item = items[index];
-
-  // We are rendering an extra item for the placeholder
-  if (!item) {
-    return null;
-  }
-
-  return (
-    <Draggable draggableId={item.id} index={index} key={item.id}>
-      {provided => <Item provided={provided} item={item} style={style} />}
-    </Draggable>
-  );
-}, areEqual);
-
-const ItemList = React.memo(function ItemList({ column, index }) {
-  // There is an issue I have noticed with react-window that when reordered
-  // react-window sets the scroll back to 0 but does not update the UI
-  // I should raise an issue for this.
-  // As a work around I am resetting the scroll to 0
-  // on any list that changes it's index
-  const listRef = useRef();
-  useLayoutEffect(() => {
-    const list = listRef.current;
-    if (list) {
-      list.scrollTo(0);
-    }
-  }, [index]);
-
-  return (
-    <Droppable
-      droppableId={column.id}
-      mode="virtual"
-      renderClone={(provided, snapshot, rubric) => (
-        <Item
-          provided={provided}
-          isDragging={snapshot.isDragging}
-          item={column.items[rubric.source.index]}
-        />
-      )}
-    >
-      {(provided, snapshot) => {
-        // Add an extra item to our list to make space for a dragging item
-        // Usually the DroppableProvided.placeholder does this, but that won't
-        // work in a virtual list
-        const itemCount = snapshot.isUsingPlaceholder
-          ? column.items.length + 1
-          : column.items.length;
-
-        return (
-          <FixedSizeList
-            height={500}
-            itemCount={itemCount}
-            itemSize={60}
-            // width={300}
-            outerRef={provided.innerRef}
-            itemData={column.items}
-            className="task-list"
-            ref={listRef}
-          >
-            {Row}
-          </FixedSizeList>
-        );
-      }}
-    </Droppable>
-  );
-});
-
-const Column = React.memo(function Column({ column, index }) {
-  const classes = useStyles();
-  const [open, setOpen] = React.useState(true);
-
-  const handleClick = () => {
-    setOpen(!open);
-  };
-
-  return (
-    <Draggable draggableId={column.id} index={index}>
-      {provided => (
-        // <div
-        //   className="column"
-        //   {...provided.draggableProps}
-        //   ref={provided.innerRef}
-        // >
-        //   <h3 className="column-title" {...provided.dragHandleProps}>
-        //     {/* <img src={column.img} alt={column.name}/> */}
-        //     <img src={img} alt={column.name}/>
-        //     {column.name}
-        //   </h3>
-        //   <ItemList column={column} index={index} />
-        // </div>
-
-        <div
-          className={classes.column}
-          {...provided.draggableProps}
-          ref={provided.innerRef}
-        >
-            <ListItem button onClick={handleClick} {...provided.dragHandleProps} className={classes.title__wrap}>
-              <ListItemIcon className={classes.icon}>
-                <AddShoppingCartIcon />
-                {/* <Avatar variant="rounded" alt={column.name} src={column.img} className={classes.small} /> */}
-              </ListItemIcon>
-              <ListItemText primary={column.name} className={classes.title} />
-              {open ? <ExpandLess /> : <ExpandMore />}
-            </ListItem>
-            <Collapse in={open} timeout="auto" unmountOnExit className={classes.ItemList_wrap}>
-              <ListMaterialUI component="div" disablePadding className={classes.ItemList_wrap2}>
-                {/* <ListItem button className={classes.nested}> */}
-                  {/* <ListItemIcon>
-                    <StarBorder />
-                  </ListItemIcon>
-                  <ListItemText primary="Starred" /> */}
-                  <ItemList column={column} index={index} />
-                {/* </ListItem> */}
-              </ListMaterialUI>
-            </Collapse>
-        </div>
-      )}
-    </Draggable>
-  );
-});
+import Column from './components/Column';
 
 function App() {
   const [state, setState] = useState(() => getInitialData());
@@ -260,16 +13,12 @@ function App() {
   // const myArray3 = myArray2.sort((a, b) => a.id - b.id);
   // console.log(myArray3);
 
-
   function onDragEnd(result) {
     if (!result.destination) {
       return;
     }
 
     if (result.type === "column") {
-      // if the list is scrolled it looks like there is some strangeness going on
-      // with react-window. It looks to be scrolling back to scroll: 0
-      // I should log an issue with the project
       const columnOrder = reorderList(
         state.columnOrder,
         result.source.index,
@@ -282,17 +31,15 @@ function App() {
       return;
     }
 
-    // reordering in same list
     if (result.source.droppableId === result.destination.droppableId) {
       const column = state.columns[result.source.droppableId];
       const items = reorderList(
         column.items,
         result.source.index,
         // result.destination.index
-        0                          // kim order 0
+        0                            // kim order 0
       );
 
-      // updating column entry
       const newState = {
         ...state,
         columns: {
@@ -382,5 +129,4 @@ function App() {
     </DragDropContext>
   );
 }
-
 export default App;
