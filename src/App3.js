@@ -5,10 +5,6 @@ import getInitialData from "./components/get-initial-data";
 import { reorderList } from "./components/reorder";
 import './App.css';
 import img from './images/p1.jpg'
-import { ListManager } from "react-beautiful-dnd-grid";
-import { FixedSizeList as List } from "react-window";
-import AutoSizer from "react-virtualized-auto-sizer";
-
 
 function getStyle({ draggableStyle, virtualStyle, isDragging }) {
   // If you don't want any spacing between your items
@@ -111,8 +107,8 @@ const ItemList = React.memo(function ItemList({ column, index }) {
           <FixedSizeList
             height={500}
             itemCount={itemCount}
-            itemSize={60}
-            // width={300}
+            itemSize={80}
+            width={300}
             outerRef={provided.innerRef}
             itemData={column.items}
             className="task-list"
@@ -244,7 +240,7 @@ function App() {
       <div className="app">
         <Droppable
           droppableId="all-droppables"
-          // direction="horizontal"
+          direction="horizontal"
           // direction="vertical"
 
           type="column"
