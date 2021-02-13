@@ -9,6 +9,64 @@ import { ListManager } from "react-beautiful-dnd-grid";
 import { FixedSizeList as List } from "react-window";
 import AutoSizer from "react-virtualized-auto-sizer";
 
+import { makeStyles } from '@material-ui/core/styles';
+import ListSubheader from '@material-ui/core/ListSubheader';
+import ListMaterialUI from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import Collapse from '@material-ui/core/Collapse';
+import InboxIcon from '@material-ui/icons/MoveToInbox';
+import DraftsIcon from '@material-ui/icons/Drafts';
+import SendIcon from '@material-ui/icons/Send';
+import ExpandLess from '@material-ui/icons/ExpandLess';
+import ExpandMore from '@material-ui/icons/ExpandMore';
+import StarBorder from '@material-ui/icons/StarBorder';
+
+import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
+import Avatar from '@material-ui/core/Avatar';            // img
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    width: '100%',
+    maxWidth: 360,
+    backgroundColor: theme.palette.background.paper,
+    display: 'flex',
+    '& > *': {
+      margin: theme.spacing(1),
+    },
+  },
+  column: {
+    margin: '1px',
+  },
+  title__wrap: {
+    border: '1px solid #ccc',
+    // textOverflow: 'ellipsis',
+    // visibility: 'hidden',
+  },
+  title: {
+    textTransform: 'uppercase',
+    whiteSpace: 'nowrap',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+    // paddingLeft: theme.spacing(4),
+  },
+  icon: {
+    minWidth: '33px',
+  },
+  // small: {                     // img avatar
+  //   width: theme.spacing(3),
+  //   height: theme.spacing(3),
+  // },
+  ItemList_wrap: {
+    backgroundColor: '#ccc',
+    paddingTop: '3px',          // dont work only (+ItemList_wrap2)
+  },
+  ItemList_wrap2: {      
+    // paddingTop: '3px',
+    padding: '3px',
+  },
+}));
 
 function getStyle({ draggableStyle, virtualStyle, isDragging }) {
   // If you don't want any spacing between your items
@@ -31,7 +89,8 @@ function getStyle({ draggableStyle, virtualStyle, isDragging }) {
     width: isDragging
       ? draggableStyle.width
       : `calc(${combined.width} - ${grid * 2}px)`,
-    marginBottom: grid
+    marginBottom: grid,
+    backgroundColor: '#aaa',
   };
 
   return result;
@@ -39,19 +98,32 @@ function getStyle({ draggableStyle, virtualStyle, isDragging }) {
 
 function Item({ provided, item, style, isDragging }) {
   return (
-    <div
-      {...provided.draggableProps}
-      {...provided.dragHandleProps}
-      ref={provided.innerRef}
-      style={getStyle({
-        draggableStyle: provided.draggableProps.style,
-        virtualStyle: style,
-        isDragging
-      })}
+    // <div
+    //   {...provided.draggableProps}
+    //   {...provided.dragHandleProps}
+    //   ref={provided.innerRef}
+    //   style={getStyle({
+    //     draggableStyle: provided.draggableProps.style,
+    //     virtualStyle: style,
+    //     isDragging
+    //   })}
+    //   className={`item ${isDragging ? "is-dragging" : ""}`}
+    // >
+    //   {item.name}
+    // </div>
+      <ListItem button divider 
+        {...provided.draggableProps}
+        {...provided.dragHandleProps}
+        ref={provided.innerRef}
+        style={getStyle({
+          draggableStyle: provided.draggableProps.style,
+          virtualStyle: style,
+          isDragging
+        })}
       className={`item ${isDragging ? "is-dragging" : ""}`}
-    >
-      {item.name}
-    </div>
+      >
+        <ListItemText primary={item.name} />
+      </ListItem>
   );
 }
 
@@ -127,20 +199,53 @@ const ItemList = React.memo(function ItemList({ column, index }) {
 });
 
 const Column = React.memo(function Column({ column, index }) {
+  const classes = useStyles();
+  const [open, setOpen] = React.useState(true);
+
+  const handleClick = () => {
+    setOpen(!open);
+  };
+
   return (
     <Draggable draggableId={column.id} index={index}>
       {provided => (
+        // <div
+        //   className="column"
+        //   {...provided.draggableProps}
+        //   ref={provided.innerRef}
+        // >
+        //   <h3 className="column-title" {...provided.dragHandleProps}>
+        //     {/* <img src={column.img} alt={column.name}/> */}
+        //     <img src={img} alt={column.name}/>
+        //     {column.name}
+        //   </h3>
+        //   <ItemList column={column} index={index} />
+        // </div>
+
         <div
-          className="column"
+          className={classes.column}
           {...provided.draggableProps}
           ref={provided.innerRef}
         >
-          <h3 className="column-title" {...provided.dragHandleProps}>
-            {/* <img src={column.img} alt={column.name}/> */}
-            <img src={img} alt={column.name}/>
-            {column.name}
-          </h3>
-          <ItemList column={column} index={index} />
+            <ListItem button onClick={handleClick} {...provided.dragHandleProps} className={classes.title__wrap}>
+              <ListItemIcon className={classes.icon}>
+                <AddShoppingCartIcon />
+                {/* <Avatar variant="rounded" alt={column.name} src={column.img} className={classes.small} /> */}
+              </ListItemIcon>
+              <ListItemText primary={column.name} className={classes.title} />
+              {open ? <ExpandLess /> : <ExpandMore />}
+            </ListItem>
+            <Collapse in={open} timeout="auto" unmountOnExit className={classes.ItemList_wrap}>
+              <ListMaterialUI component="div" disablePadding className={classes.ItemList_wrap2}>
+                {/* <ListItem button className={classes.nested}> */}
+                  {/* <ListItemIcon>
+                    <StarBorder />
+                  </ListItemIcon>
+                  <ListItemText primary="Starred" /> */}
+                  <ItemList column={column} index={index} />
+                {/* </ListItem> */}
+              </ListMaterialUI>
+            </Collapse>
         </div>
       )}
     </Draggable>
@@ -239,8 +344,15 @@ function App() {
     setState(newState);
   }
 
+  // kim2 vibro
+  const onDragStart = () => {
+    if (window.navigator.vibrate) {
+      window.navigator.vibrate(100);
+    }
+  };
+
   return (
-    <DragDropContext onDragEnd={onDragEnd}>
+    <DragDropContext onDragEnd={onDragEnd} onDragStart={onDragStart} >
       <div className="app">
         <Droppable
           droppableId="all-droppables"

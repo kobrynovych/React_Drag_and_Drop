@@ -51,7 +51,7 @@
   --pink: #fd3afd;
   --title: #000;
   --pinkDark: #690169;
-  --greyLight: #515b7d;
+  --greyLight: #aaa;
   --black: #1d212e;
   --white: #fff;
   --borderWidth: 1px;
@@ -83,29 +83,30 @@ body {
 }
 
 .column {
-  margin: calc(var(--grid) / 2);
-  border: var(--borderWidth) solid #aaa;
-  border-radius: var(--borderRadius);
+  /* margin: calc(var(--grid) / 2); */
+  margin: 1px;
+  /* border: var(--borderWidth) solid #aaa; */
+  /* border-radius: var(--borderRadius); */
   /* background-color: #2a2f41; */
-  background-color: #ccc;
+  /* background-color: #ccc; */
 }
 
 .column-title {
-  font-size: 19px;
-  color: var(--title);
+  /* font-size: 19px; */
+  /* color: var(--title); */
   /* text-shadow: 0px 0px 2px var(--pinkDark),
     0px 0px 15px rgba(56, 48, 56, 0.5);   */
   /* text-shadow: 0px 0px 2px var(--pinkDark),
     0px 0px 15px rgba(0, 0, 0, 0.5); */
-  text-align: center;
-  text-transform: uppercase;
-  margin: 0;
+  /* text-align: center; */
+  /* text-transform: uppercase; */
+  /* margin: 0; */
 }
 
 .column-title:hover {
   /* text-shadow: 0px 0px 2px var(--pinkDark),
     0px 0px 15px rgba(255, 110, 255, 0.8); */
-    opacity: .7;
+    /* opacity: .7; */
 }
 
 .task-list {
@@ -113,7 +114,7 @@ body {
   doing this ensures that dropping into an empty list will be in the correct visual position */
   /* padding-left: var(--grid); */
   /* padding-right: var(--grid); */
-  scrollbar-color: dark;
+  /* scrollbar-color: dark; */
 }
 
 .task-list::-webkit-scrollbar {
@@ -126,28 +127,32 @@ body {
 }
 
 .task-list::-webkit-scrollbar-thumb {
-  background-color: var(--title);
+  /* background-color: var(--title); */
+  background-color: rgb(139, 139, 139);
 }
 
 .item {
   /* background: #333851; */
-  background: rgb(80, 78, 78);
-  border: var(--borderWidth) solid mediumpurple;
-  box-sizing: border-box;
-  border-radius: var(--borderRadius);
-  color: #cdd5ee;
-  font-size: 19px;
-  user-select: none;
+  /* background: rgb(80, 78, 78); */
+  /* background-color: #aaa!important; */
+  /* border: var(--borderWidth) solid mediumpurple; */
+  /* box-sizing: border-box; */
+  /* border-radius: var(--borderRadius); */
+  /* color: #cdd5ee; */
+  /* font-size: 19px; */
+  /* user-select: none; */
 
   /* center align text */
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  /* display: flex; */
+  /* justify-content: center; */
+  /* align-items: center; */
 }
 
 .item.is-dragging {
-  /* background: #515b7d; */
-  background: #696b70;
-  border-color: #08ff08;
+  color: #fff!important;
+  background-color: rgb(112, 112, 112)!important;
   box-shadow: 0px 0px 2px rgb(8, 58, 30), 0px 0px 10px MediumSeaGreen;
+}
+.item span::first-letter {
+  text-transform: uppercase;
 }
