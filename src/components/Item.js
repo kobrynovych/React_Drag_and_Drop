@@ -17,7 +17,12 @@ const getStyle = ({ draggableStyle, virtualStyle, isDragging }) => {
         ? draggableStyle.width
         : `calc(${combined.width} - ${grid * 2}px)`,
       marginBottom: grid,
-      backgroundColor: '#aaa',
+      // backgroundColor: '#aaa',
+      backgroundColor: 'lightgrey',
+      borderRadius: '15px',
+      color: 'rgba(0,0,0,.6)',
+      // border: '1px solid lightblue',
+      boxShadow: '2px 2px #aaa'
     };
     return result;
   }

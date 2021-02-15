@@ -34,31 +34,83 @@ const useStyles = makeStyles((theme) => ({
       height: theme.spacing(3),
     },
     ItemList_wrap: {
-      backgroundColor: '#ccc',
-      paddingTop: '3px',          // dont work only (+ItemList_wrap2)
+      backgroundColor: 'lightblue',
+      // paddingTop: '3px',          // dont work only (+ItemList_wrap2)
+      // height: '40px',
+      // display: 'dlock!important',
+      // height: '0px',
     },
     ItemList_wrap2: {      
-      padding: '3px',
+      // padding: '3px',
+      // height: '30px',
+      // overflow: 'hidden',
+      // display: 'dlock!important',
+
     },
   }));
 
 const Column = React.memo(function Column({ column, index }) {
     const classes = useStyles();
-    const [open, setOpen] = useState(true);
+    const [open, setOpen] = useState(false);
   
     const handleClick = () => {
       setOpen(!open);
     };
   
+    // const handleMouseOver = isDraggingOver => event => {
+    //   debugger
+    //   if (isDraggingOver) {
+    //     setOpen(true);
+    //   }
+    // };
+    const handleMouseOver2 = isDraggingOver => {
+      // debugger
+      if (isDraggingOver) {
+        setOpen(false);
+      }
+    };
+
+    const getListStyle = (isDraggingOver) => {
+      debugger
+      if (isDraggingOver) {
+
+      }
+
+      return {
+      // background: isDraggingOver ? 'lightblue!important' : 'lightgrey!important',
+      // background: isDraggingOver ? 'lightblue' : 'lightgrey',
+      background: isDraggingOver ? 'lightblue' : '#fff',
+      // height: isDraggingOver && '200px',
+      // top: isDraggingOver && '-50px',
+      // height: isDraggingOver && '50px',
+      // padding: '8px',
+      // width: 250,
+      // display: 'none',
+    }};
+
     return (
       <Draggable draggableId={column.id} index={index}>
-        {provided => (
+        {(provided, snapshot) => {
+// debugger
+          return (
           <div
             className={classes.column}
             {...provided.draggableProps}
             ref={provided.innerRef}
+            // style={getListStyle(snapshot.isDraggingOver)}
+            // style={getListStyle(snapshot.draggingOver)}
+
+            // style={{ backgroundColor: snapshot.isDraggingOver ? 'blue' : 'grey' }}
+            // style={{
+            //   backgroundColor: provided.isDragging ? 'green' : 'lightblue',
+            // }}
           >
-              <ListItem button onClick={handleClick} {...provided.dragHandleProps} className={classes.title__wrap}>
+              <ListItem button onClick={handleClick} {...provided.dragHandleProps} className={classes.title__wrap}
+                // onMouseOver={handleMouseOver(snapshot.isDraggingOver)}
+                // onMouseOver={handleMouseOver(snapshot.isDragging)}
+                // onMouseMove={handleMouseOver(snapshot.isDragging)}
+                style={getListStyle(snapshot.isDragging)}
+              >
                 <ListItemIcon className={classes.icon}>
                   <AddShoppingCartIcon />
                   {/* <Avatar variant="rounded" alt={column.name} src={column.img} className={classes.small} /> */}
@@ -67,13 +119,18 @@ const Column = React.memo(function Column({ column, index }) {
                 <ListItemText primary={column.name} className={classes.title} />
                 {open ? <ExpandLess /> : <ExpandMore />}
               </ListItem>
-              <Collapse in={open} timeout="auto" unmountOnExit className={classes.ItemList_wrap}>
-                <ListMaterialUI component="div" disablePadding className={classes.ItemList_wrap2}>
-                    <ItemListApp column={column} index={index} />
+              {/* <Collapse in={open} timeout="auto" unmountOnExit className={classes.ItemList_wrap}> */}
+              <div className={classes.ItemList_wrap} >
+                <ListMaterialUI component="div" disablePadding className={classes.ItemList_wrap2} style={{height: !open && '0px', paddingTop: open && '3px'}}>
+                    <ItemListApp column={column} index={index} 
+                      handleMouseOver2={handleMouseOver2}
+                      open={open}
+                    />
                 </ListMaterialUI>
-              </Collapse>
+              {/* </Collapse> */}
+              </div>
           </div>
-        )}
+          )}}
       </Draggable>
     );
   });

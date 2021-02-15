@@ -108,7 +108,7 @@ function App() {
 
           type="column"
         >
-          {provided => (
+          {(provided, snapshot) => (
             <div
               className="columns"
               {...provided.droppableProps}
