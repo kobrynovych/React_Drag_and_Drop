@@ -104,15 +104,14 @@ function App() {
   return (
     <DragDropContext onDragEnd={onDragEnd} onDragStart={onDragStart} >
       <div className="app">
-        <Droppable
+        {/* <Droppable
           droppableId="all-droppables"
           // direction="horizontal"
           // direction="vertical"
-
           type="column"
         >
           {(provided, snapshot) => {
-            debugger
+            // debugger
             return (
             <div
               className="columns"
@@ -129,7 +128,62 @@ function App() {
               {provided.placeholder}
             </div>
           )}}
+        </Droppable> */}
+        <div className="columns_wrap">
+          <div>
+            <Droppable
+              droppableId="all-droppables1"
+              // direction="horizontal"
+              // direction="vertical"
+              type="column"
+            >
+              {(provided, snapshot) => {
+                // debugger
+                return (
+                <div
+                  className="columns"
+                  {...provided.droppableProps}
+                  ref={provided.innerRef}
+                >
+                  {state.columnOrder.map((columnId, index) => (<React.Fragment key={columnId}>
+                    {columnId === 'разное' && (<Column
+                        // key={columnId}
+                        columnId={columnId}
+                        column={state.columns[columnId]}
+                        index={index}
+                      />)}</React.Fragment>
+                    ))}
+                  {provided.placeholder}
+                </div>
+              )}}
+            </Droppable>
+          </div>
+        <Droppable
+          droppableId="all-droppables"
+          // direction="horizontal"
+          // direction="vertical"
+          type="column"
+        >
+          {(provided, snapshot) => {
+            // debugger
+            return (
+            <div
+              className="columns"
+              {...provided.droppableProps}
+              ref={provided.innerRef}
+            >
+              {state.columnOrder.map((columnId, index) => (<React.Fragment key={columnId}>
+                {columnId !== 'разное' && (<Column
+                  // key={columnId}
+                  column={state.columns[columnId]}
+                  index={index}
+                />)}</React.Fragment>
+              ))}
+              {provided.placeholder}
+            </div>
+          )}}
         </Droppable>
+        </div>
       </div>
     </DragDropContext>
   );

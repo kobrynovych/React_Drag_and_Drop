@@ -11,12 +11,13 @@ const getStyle = ({ draggableStyle, virtualStyle, isDragging }) => {
 
     const result = {
       ...combined,
-      height: isDragging ? combined.height : combined.height - (grid * 3) ,
+      height: isDragging ? combined.height : combined.height - (grid*3) ,
       left: isDragging ? combined.left : combined.left + grid,
       width: isDragging
         ? draggableStyle.width
-        : `calc(${combined.width} - ${grid * 2}px)`,
-      marginBottom: grid,
+        : `calc(${combined.width} - ${grid * 3}px)`,
+      // marginBottom: grid,
+      marginBottom: `${grid*3}px`,
       // backgroundColor: '#aaa',
       backgroundColor: 'lightgrey',
       borderRadius: '15px',

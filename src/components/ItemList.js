@@ -75,14 +75,14 @@ const ItemListApp = React.memo(function ItemList({ column, index, open, setIsHov
 
     // data-rbd-draggable-id='разное'
 
-    
+
     const getListStyle = (isDraggingOver) => {
       // debugger
       if (!open && isDraggingOver) {
-        setIsHover(false)
+        setIsHover(false);
       }
       if (!open && !isDraggingOver) {
-        setIsHover(true)
+        setIsHover(true);
       }
 
       return {
@@ -90,6 +90,7 @@ const ItemListApp = React.memo(function ItemList({ column, index, open, setIsHov
       // background: isDraggingOver ? 'lightblue' : 'lightgrey',
       // background: isDraggingOver ? 'lightblue' : 'green',
       // background: isDraggingOver ? 'rgb(189, 255, 217)' : 'lightblue',
+      transition: 'background .7s',
       background: open ? isDraggingOver ? 'rgb(189, 255, 217)' : 'lightblue' : isDraggingOver ? 'rgb(189, 255, 217)' : 'transparent',
       // height: isDraggingOver && '200px',
       // top: isDraggingOver && '-50px',
@@ -131,7 +132,8 @@ const ItemListApp = React.memo(function ItemList({ column, index, open, setIsHov
               // height={500}
               height={sizeKim}
               itemCount={itemCount}
-              itemSize={60}
+              // itemSize={60}
+              itemSize={50}
               // width={300}
               outerRef={provided.innerRef}
               itemData={column.items}

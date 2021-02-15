@@ -19,8 +19,10 @@ const styleColumnWrap = () => {
 
 
 
-const Column = React.memo(function Column({ column, index }) {
-    const [open, setOpen] = useState(false);
+const Column = React.memo(function Column({ column, index, columnId = null }) {
+    const openStart = columnId === 'разное' ? true : false;
+    // const [open, setOpen] = useState(false);
+    const [open, setOpen] = useState(openStart);
     const [isHover, setIsHover] = useState(false);
   
     const useStyles = makeStyles((theme) => ({
@@ -32,7 +34,13 @@ const Column = React.memo(function Column({ column, index }) {
         border: '1px solid #ccc',
         // padding: '11px',
         // backgroundColor: styleHover && 'red!important',
-        backgroundColor: isHover ? '' : 'rgb(189, 255, 217)!important',
+        // backgroundColor: isHover ? '' : 'rgb(189, 255, 217)!important',
+        // backgroundColor: isHover ? '' : '#fff!important',
+        backgroundColor: isHover ? '' : open ? '#fff!important' : 'rgb(189, 255, 217)!important',
+        
+        // backgroundColor: columnId === 'разное' && '#fff!important',
+        transition: 'background .7s',
+
   
         
         // '&:hover': {backgroundColor: 'lightgreen'},
@@ -61,6 +69,8 @@ const Column = React.memo(function Column({ column, index }) {
       },
       ItemList_wrap: {
         backgroundColor: 'lightblue',
+        transition: ' .7s',
+
         // paddingTop: '3px',          // dont work only (+ItemList_wrap2)
         // height: '40px',
         // display: 'dlock!important',
@@ -106,7 +116,8 @@ const Column = React.memo(function Column({ column, index }) {
       return {
       // background: isDraggingOver ? 'lightblue!important' : 'lightgrey!important',
       // background: isDraggingOver ? 'lightblue' : 'lightgrey',
-      background: isDraggingOver ? 'lightblue' : '#fff',
+      // background: isDraggingOver ? 'lightblue' : '#fff',
+      background: isDraggingOver ? 'rgb(160, 160, 255)' : '#fff',
       // height: isDraggingOver && '200px',
       // top: isDraggingOver && '-50px',
       // height: isDraggingOver && '50px',
@@ -125,16 +136,26 @@ const Column = React.memo(function Column({ column, index }) {
   //     data-rbd-draggable-context-id: "1"
   //     data-rbd-draggable-id: "разное"
 
-  const getListStyleAll = (el) => {
-    debugger
-    if (el['data-rbd-draggable-id'] === 'разное') {
-      return {
-        backgroundColor: 'red!important',
-        color: 'red',
-        // height: '200px'
-      }
-    }
-  }
+  // const getListStyleAll = (el) => {
+  //   // debugger
+  //   if (el['data-rbd-draggable-id'] === 'разное') {
+  //     return {
+  //       backgroundColor: 'red!important',
+  //       color: 'red!important',
+  //       // height: '200px'
+  //     }
+  //   }
+  //   return {};
+  // }
+
+  // const getListStyleAll = (el) => {
+  //   debugger
+  //   if (el === 'разное') {
+  //     setOpen(true);
+  //   }
+  //   return {};
+  // }
+
     return (
       <Draggable draggableId={column.id} index={index}>
         {(provided, snapshot) => {
@@ -151,7 +172,11 @@ debugger
             // style={{
             //   backgroundColor: provided.isDragging ? 'green' : 'lightblue',
             // }}
-            style={getListStyleAll(provided.draggableProps)}
+            // style={getListStyleAll(provided.draggableProps)}
+            // style={getListStyleAll(provided.draggableProps['data-rbd-draggable-id'])}
+            // style={{
+            //   // color: provided.draggableProps['data-rbd-draggable-id'] === 'разное' ? 'green!important' : 'lightblue!important',
+            // }}
           >
               <ListItem button onClick={handleClick} {...provided.dragHandleProps} className={classes.title__wrap}
                 // onMouseOver={handleMouseOver(snapshot.isDraggingOver)}
@@ -175,8 +200,8 @@ debugger
                       setIsHover={setIsHover}
                     />
                 </ListMaterialUI>
-              {/* </Collapse> */}
               </div>
+              {/* </Collapse> */}
           </div>
           )}}
       </Draggable>
