@@ -11,7 +11,7 @@ const getStyle = ({ draggableStyle, virtualStyle, isDragging }) => {
 
     const result = {
       ...combined,
-      height: isDragging ? combined.height : combined.height - grid,
+      height: isDragging ? combined.height : combined.height - (grid * 3) ,
       left: isDragging ? combined.left : combined.left + grid,
       width: isDragging
         ? draggableStyle.width

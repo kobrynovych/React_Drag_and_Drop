@@ -6,7 +6,7 @@ import Row from './Row';
 
 
 
-const ItemListApp = React.memo(function ItemList({ column, index, handleMouseOver2, open }) {
+const ItemListApp = React.memo(function ItemList({ column, index, open, setIsHover }) {
     const listRef = useRef();
     useLayoutEffect(() => {
       const list = listRef.current;
@@ -73,17 +73,24 @@ const ItemListApp = React.memo(function ItemList({ column, index, handleMouseOve
   //   data-rbd-droppable-context-id: "1"
   //   data-rbd-droppable-id: "деликатесы"
 
+    // data-rbd-draggable-id='разное'
+
+    
     const getListStyle = (isDraggingOver) => {
       // debugger
-      if (isDraggingOver) {
-
+      if (!open && isDraggingOver) {
+        setIsHover(false)
+      }
+      if (!open && !isDraggingOver) {
+        setIsHover(true)
       }
 
       return {
       // background: isDraggingOver ? 'lightblue!important' : 'lightgrey!important',
       // background: isDraggingOver ? 'lightblue' : 'lightgrey',
       // background: isDraggingOver ? 'lightblue' : 'green',
-      background: isDraggingOver ? 'rgb(189, 255, 217)' : 'lightblue',
+      // background: isDraggingOver ? 'rgb(189, 255, 217)' : 'lightblue',
+      background: open ? isDraggingOver ? 'rgb(189, 255, 217)' : 'lightblue' : isDraggingOver ? 'rgb(189, 255, 217)' : 'transparent',
       // height: isDraggingOver && '200px',
       // top: isDraggingOver && '-50px',
       // height: isDraggingOver && '50px',
@@ -91,10 +98,11 @@ const ItemListApp = React.memo(function ItemList({ column, index, handleMouseOve
       // display: 'none',
       width: !open && '83%',
       top: !open && '-45px',
+      borderRadius: '15px',
       // height: !open && '50px',
       opacity: !open && '0',
-      // opacity: isDraggingOver && open ? '0' : '0.2',
-      
+      // opacity: open && isDraggingOver ? '1' : '0',
+      // opacity: open ? isDraggingOver ? '1' : '1' : isDraggingOver ? '1' : '0',
     }};
 
     return (
@@ -129,6 +137,7 @@ const ItemListApp = React.memo(function ItemList({ column, index, handleMouseOve
               itemData={column.items}
               className="task-list"
               style={getListStyle(snapshot.isDraggingOver)}
+              // style={getListStyle(snapshot.isDragging)}
               ref={listRef}
             >
               {Row}

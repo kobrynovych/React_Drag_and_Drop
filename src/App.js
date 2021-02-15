@@ -98,6 +98,9 @@ function App() {
     }
   };
 
+  // provided
+  //   droppableProps:
+  //     data-rbd-droppable-context-id: "1"
   return (
     <DragDropContext onDragEnd={onDragEnd} onDragStart={onDragStart} >
       <div className="app">
@@ -108,7 +111,9 @@ function App() {
 
           type="column"
         >
-          {(provided, snapshot) => (
+          {(provided, snapshot) => {
+            debugger
+            return (
             <div
               className="columns"
               {...provided.droppableProps}
@@ -123,7 +128,7 @@ function App() {
               ))}
               {provided.placeholder}
             </div>
-          )}
+          )}}
         </Droppable>
       </div>
     </DragDropContext>

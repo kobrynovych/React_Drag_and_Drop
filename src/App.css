@@ -16,10 +16,20 @@ body {
   display: flex;
 }
 
+.columns_wrap {
+  width: 100%;
+  display: grid;
+  /* grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); */
+  /* grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); */
+  grid-template-columns: 3fr 1fr;
+}
+
 .columns {
   width: 100%;
   display: grid;
+  /* grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); */
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  /* grid-template-columns: 1fr 3fr; */
 }
 
 .column {
