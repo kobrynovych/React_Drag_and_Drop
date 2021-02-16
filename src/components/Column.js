@@ -13,15 +13,8 @@ import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import Avatar from '@material-ui/core/Avatar';                           // img
 import ItemListApp from './ItemList';
 
-const styleColumnWrap = () => {
-
-}
-
-
-
 const Column = React.memo(function Column({ column, index, columnId = null }) {
     const openStart = columnId === 'разное' ? true : false;
-    // const [open, setOpen] = useState(false);
     const [open, setOpen] = useState(openStart);
     const [isHover, setIsHover] = useState(false);
   
@@ -39,17 +32,7 @@ const Column = React.memo(function Column({ column, index, columnId = null }) {
         backgroundColor: isHover ? '' : open ? '#fff!important' : 'rgb(189, 255, 217)!important',
         
         // backgroundColor: columnId === 'разное' && '#fff!important',
-        transition: 'background .7s',
-
-  
-        
-        // '&:hover': {backgroundColor: 'lightgreen'},
-        '&:hover': {
-          // backgroundColor: 'red!important',
-          // "& $addIcon": {
-          //   color: "purple"
-          // }
-       }
+        transition: 'background .4s',
       },
       // title__wrap:hover: {
       //   backgroundColor: 'lightgreen',
@@ -69,8 +52,7 @@ const Column = React.memo(function Column({ column, index, columnId = null }) {
       },
       ItemList_wrap: {
         backgroundColor: 'lightblue',
-        transition: ' .7s',
-
+        transition: 'background .4s',
         // paddingTop: '3px',          // dont work only (+ItemList_wrap2)
         // height: '40px',
         // display: 'dlock!important',
@@ -81,25 +63,15 @@ const Column = React.memo(function Column({ column, index, columnId = null }) {
         // height: '30px',
         // overflow: 'hidden',
         // display: 'dlock!important',
-  
       },
     }));
 
-    // data-rbd-draggable-id='разное'
-
     const classes = useStyles();
-
 
     const handleClick = () => {
       setOpen(!open);
     };
   
-    // const handleMouseOver = isDraggingOver => event => {
-    //   debugger
-    //   if (isDraggingOver) {
-    //     setOpen(true);
-    //   }
-    // };
     const handleMouseOver2 = isDraggingOver => {
       // debugger
       if (isDraggingOver) {
@@ -114,52 +86,13 @@ const Column = React.memo(function Column({ column, index, columnId = null }) {
       }
 
       return {
-      // background: isDraggingOver ? 'lightblue!important' : 'lightgrey!important',
-      // background: isDraggingOver ? 'lightblue' : 'lightgrey',
-      // background: isDraggingOver ? 'lightblue' : '#fff',
       background: isDraggingOver ? 'rgb(160, 160, 255)' : '#fff',
-      // height: isDraggingOver && '200px',
-      // top: isDraggingOver && '-50px',
-      // height: isDraggingOver && '50px',
-      // padding: '8px',
-      // width: 250,
-      // display: 'none',
     }};
-
-  // provided
-  //   dragHandleProps:
-  //     aria-describedby: "rbd-hidden-text-1-hidden-text-1"
-  //     data-rbd-drag-handle-context-id: "1"
-  //     data-rbd-drag-handle-draggable-id: "разное"
-
-  //   draggableProps:
-  //     data-rbd-draggable-context-id: "1"
-  //     data-rbd-draggable-id: "разное"
-
-  // const getListStyleAll = (el) => {
-  //   // debugger
-  //   if (el['data-rbd-draggable-id'] === 'разное') {
-  //     return {
-  //       backgroundColor: 'red!important',
-  //       color: 'red!important',
-  //       // height: '200px'
-  //     }
-  //   }
-  //   return {};
-  // }
-
-  // const getListStyleAll = (el) => {
-  //   debugger
-  //   if (el === 'разное') {
-  //     setOpen(true);
-  //   }
-  //   return {};
-  // }
 
     return (
       <Draggable draggableId={column.id} index={index}>
         {(provided, snapshot) => {
-debugger
+// debugger
           return (
           <div
             className={classes.column}

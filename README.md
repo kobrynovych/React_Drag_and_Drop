@@ -35,7 +35,8 @@ This is a simple react app using public [`React window`](https://www.npmjs.com/p
 
 ## Technologies
 Project uses:
-* React (useState, useLayoutEffect, useRef, React.memo)
+* React (useState, useEffect, useLayoutEffect, useRef, React.memo)
 * React-beautiful-dnd"
 * React-window
 * Material-ui
+* Axios

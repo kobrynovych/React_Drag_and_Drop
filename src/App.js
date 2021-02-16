@@ -1,18 +1,42 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import getInitialData from "./components/get-initial-data";
 import { reorderList } from "./components/reorder";
 import './App.css';
 import Column from './components/Column';
+import axios from "axios";
 
 function App() {
   const [state, setState] = useState(() => getInitialData());
+  const [newProductId, setNewProductId] = useState(null);
+  const [newGroupId, setNewGroupId] = useState(null);
   // debugger
   // const myArray = Object.values(state.columns).map(el => el.items).flat();
   // const myArray2 = myArray.map(el => ({id: Number(el.id), name: el.name, groupId: el.groupId, groupName: el.groupName}));
   // const myArray3 = myArray2.sort((a, b) => a.id - b.id);
   // console.log(myArray3);
 
+  // useEffect(async () => {
+  //   debugger
+  //   if (newProductId && newGroupId) {
+  //     const api = 'https://helper-pepper.com/api/';
+  //     const id = 'asd';
+  //     try {
+  //       const response = await axios.put(`${api}product/${newProductId}/group/${newGroupId}/${id}`, 
+  //         {"body":data}, 
+  //         {
+  //           headers: {
+  //            'Content-Type': 'application/json'
+  //         },
+  //       });
+  //       console.log(response);
+  //     } catch (error) {
+  //       // console.log(error.response.data.error);
+  //       console.error(error);
+  //     }
+  //   }
+  // }, [newProductId, newGroupId])
+  
   function onDragEnd(result) {
     if (!result.destination) {
       return;
@@ -87,8 +111,10 @@ function App() {
         [newDestinationColumn.id]: newDestinationColumn
       }
     };
-
+// debugger
     setState(newState);
+    setNewProductId(Number(item.id));
+    setNewGroupId(newDestinationColumn.id0);
   }
 
   // kim2 vibro
@@ -104,31 +130,6 @@ function App() {
   return (
     <DragDropContext onDragEnd={onDragEnd} onDragStart={onDragStart} >
       <div className="app">
-        {/* <Droppable
-          droppableId="all-droppables"
-          // direction="horizontal"
-          // direction="vertical"
-          type="column"
-        >
-          {(provided, snapshot) => {
-            // debugger
-            return (
-            <div
-              className="columns"
-              {...provided.droppableProps}
-              ref={provided.innerRef}
-            >
-              {state.columnOrder.map((columnId, index) => (
-                <Column
-                  key={columnId}
-                  column={state.columns[columnId]}
-                  index={index}
-                />
-              ))}
-              {provided.placeholder}
-            </div>
-          )}}
-        </Droppable> */}
         <div className="columns_wrap">
           <div>
             <Droppable
