@@ -14,6 +14,7 @@ import Avatar from '@material-ui/core/Avatar';                           // img
 import ItemListApp from './ItemList';
 
 const Column = React.memo(function Column({ column, index, columnId = null }) {
+  // debugger
     const openStart = columnId === 'разное' ? true : false;
     const [open, setOpen] = useState(openStart);
     const [isHover, setIsHover] = useState(false);
@@ -29,29 +30,45 @@ const Column = React.memo(function Column({ column, index, columnId = null }) {
         // backgroundColor: styleHover && 'red!important',
         // backgroundColor: isHover ? '' : 'rgb(189, 255, 217)!important',
         // backgroundColor: isHover ? '' : '#fff!important',
-        backgroundColor: isHover ? '' : open ? '#fff!important' : 'rgb(189, 255, 217)!important',
-        
+
+        backgroundColor: isHover ? '' : open ? 'rgb(160, 160, 255)!important' : 'rgb(189, 255, 217)!important',
+    
         // backgroundColor: columnId === 'разное' && '#fff!important',
         transition: 'background .4s',
       },
-      // title__wrap:hover: {
-      //   backgroundColor: 'lightgreen',
-      // },
-      title: {
+      listItemText: {                  // title
+        fontSize:'.9rem',
         textTransform: 'uppercase',
         whiteSpace: 'nowrap',
         overflow: 'hidden',
         textOverflow: 'ellipsis',
+        paddingLeft: '8px',
       },
       icon: {
         minWidth: '33px',
+        position: 'relative',
+      },
+      lengthGroup: {
+        position: 'absolute',
+        fontSize: '12px',
+        top: '-105%',
+        left: '55%',
+        // transform: translate(),
+        backgroundColor: 'red',
+        color: '#fff',
+        borderRadius: '50%',
+        padding: '7% 13%',
+        textAlign: 'center',
+        verticalAlign: 'center',
+        lineHeight: '1em',
       },
       small: {                     // img avatar
         width: theme.spacing(3),
         height: theme.spacing(3),
       },
       ItemList_wrap: {
-        backgroundColor: 'lightblue',
+        // backgroundColor: 'lightblue',
+        backgroundColor: '#f5f5f5',
         transition: 'background .4s',
         // paddingTop: '3px',          // dont work only (+ItemList_wrap2)
         // height: '40px',
@@ -86,7 +103,14 @@ const Column = React.memo(function Column({ column, index, columnId = null }) {
       }
 
       return {
-      background: isDraggingOver ? 'rgb(160, 160, 255)' : '#fff',
+      // background: isDraggingOver ? 'rgb(160, 160, 255)' : '#fff',
+      // background: isDraggingOver ? 'rgb(160, 160, 255)' : '#6fda44',    // column title wrap
+      // background: isDraggingOver ? 'rgb(160, 160, 255)' : 'rgb(160, 160, 255)',    // column title wrap
+      // background: isDraggingOver ? 'rgb(160, 160, 255)' :  open ? '#cacaff' : 'rgb(160, 160, 255)',    // column title wrap
+      background: isDraggingOver ? 'rgb(160, 160, 255)' :  open ? 'rgb(160, 160, 255)' : '#cacaff',    // column title wrap
+      // backgroundColor: open ? 'red!important' : 'black!important',
+
+      
     }};
 
     return (
@@ -118,11 +142,12 @@ const Column = React.memo(function Column({ column, index, columnId = null }) {
                 style={getListStyle(snapshot.isDragging)}
               >
                 <ListItemIcon className={classes.icon}>
+                  {column.items.length > 0 && <p className={classes.lengthGroup}>{column.items.length}</p>}
                   <AddShoppingCartIcon />
                   {/* <Avatar variant="rounded" alt={column.name} src={column.img} className={classes.small} /> */}
                   {/* <Avatar variant="rounded" alt={column.name} src={img} className={classes.small} /> */}
                 </ListItemIcon>
-                <ListItemText primary={column.name} className={classes.title} />
+                <ListItemText primary={column.name} className={classes.title} classes={{primary:classes.listItemText}}/>
                 {open ? <ExpandLess /> : <ExpandMore />}
               </ListItem>
               {/* <Collapse in={open} timeout="auto" unmountOnExit className={classes.ItemList_wrap}> */}

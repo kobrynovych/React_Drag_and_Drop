@@ -14,6 +14,8 @@ body {
 }
 .app {
   display: flex;
+  max-width: 1440px;
+  margin: 0 auto; 
 }
 
 .columns_wrap {
@@ -53,7 +55,7 @@ body {
 .column {
   margin: 1px;
 }
-
+   
 .column-title {}
 
 .column-title:hover {}
@@ -84,8 +86,14 @@ body {
   /* align-items: center; */
 }
 .item:hover {
-  /* background-color: rgb(189, 255, 217); */
-  /* opacity: .6; */
+  /* background-color: rgb(189, 255, 217)!important; */
+  background-color: rgba(0, 0, 0, 0.04)!important;
+  /* color: rgba(189, 255, 217);   */
+  /* background-color: #121212!important; */
+  /* background-color: #121212!important; */
+  /* #333 */
+  /* color: #fff!important; */
+  /* opacity: .7; */
 }
 
 .item.is-dragging {

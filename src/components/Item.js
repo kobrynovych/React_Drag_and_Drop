@@ -34,14 +34,21 @@ const getStyle = ({ draggableStyle, virtualStyle, isDragging }) => {
         ? draggableStyle.width
         : `calc(${combined.width} - ${grid * 3}px)`,
       // marginBottom: grid,
+      
       marginBottom: `${grid}px`,
+
       // backgroundColor: '#aaa',
       // backgroundColor: 'lightgrey',
-      backgroundColor: 'lightgrey',
+      backgroundColor: '#fff',
       // borderRadius: '15px',
-      color: 'rgba(0,0,0,.6)',
+      // color: 'rgba(0,0,0,.6)',
+      color: 'rgba(0, 0, 0, 0.87)',
+      
       // border: '1px solid lightblue',
-      boxShadow: '2px 2px #aaa',
+      // boxShadow: '2px 2px #aaa',
+      boxShadow: '0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%)',
+      
+
       // paddingRight: '0px',
       // transition: 'background .4s',
     };
@@ -56,6 +63,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Item = ({ provided, item, style, isDragging, index = ''}) => {
+  // debugger
   const classes = useStyles();
   // debugger
   const options = [
@@ -76,7 +84,7 @@ const Item = ({ provided, item, style, isDragging, index = ''}) => {
   const handleClose = () => {
     setAnchorEl(null);
   };
-  // debugger
+
     return (
         <ListItem button divider 
           {...provided.draggableProps}
