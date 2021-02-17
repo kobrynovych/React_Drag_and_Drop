@@ -12,6 +12,8 @@ import ExpandMore from '@material-ui/icons/ExpandMore';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import Avatar from '@material-ui/core/Avatar';                           // img
 import ItemListApp from './ItemList';
+import Search from './Search';
+
 
 const Column = React.memo(function Column({ column, index, columnId = null }) {
   // debugger
@@ -25,14 +27,15 @@ const Column = React.memo(function Column({ column, index, columnId = null }) {
         // padding: '1px',
       },
       title__wrap: {
-        border: '1px solid #ccc',
-        // padding: '11px',
+        border: '1px solid #ddd',
+        padding: '15px',
         // backgroundColor: styleHover && 'red!important',
         // backgroundColor: isHover ? '' : 'rgb(189, 255, 217)!important',
         // backgroundColor: isHover ? '' : '#fff!important',
 
-        backgroundColor: isHover ? '' : open ? 'rgb(160, 160, 255)!important' : 'rgb(189, 255, 217)!important',
-    
+        // backgroundColor: isHover ? '' : open ? 'rgb(160, 160, 255)!important' : 'rgb(189, 255, 217)!important',
+        backgroundColor: isHover ? '' : open ? '#f4f4f4!important' : '#bbb!important',
+        
         // backgroundColor: columnId === 'разное' && '#fff!important',
         transition: 'background .4s',
       },
@@ -53,7 +56,6 @@ const Column = React.memo(function Column({ column, index, columnId = null }) {
         fontSize: '12px',
         top: '-105%',
         left: '55%',
-        // transform: translate(),
         backgroundColor: 'red',
         color: '#fff',
         borderRadius: '50%',
@@ -107,7 +109,8 @@ const Column = React.memo(function Column({ column, index, columnId = null }) {
       // background: isDraggingOver ? 'rgb(160, 160, 255)' : '#6fda44',    // column title wrap
       // background: isDraggingOver ? 'rgb(160, 160, 255)' : 'rgb(160, 160, 255)',    // column title wrap
       // background: isDraggingOver ? 'rgb(160, 160, 255)' :  open ? '#cacaff' : 'rgb(160, 160, 255)',    // column title wrap
-      background: isDraggingOver ? 'rgb(160, 160, 255)' :  open ? 'rgb(160, 160, 255)' : '#cacaff',    // column title wrap
+      // background: isDraggingOver ? 'rgb(160, 160, 255)' :  open ? 'rgb(160, 160, 255)' : '#cacaff',    // column title wrap
+      background: isDraggingOver ? '#a0a0ff' :  open ? '#f4f4f4' : '#ddd',    // column title wrap
       // backgroundColor: open ? 'red!important' : 'black!important',
 
       
@@ -148,6 +151,7 @@ const Column = React.memo(function Column({ column, index, columnId = null }) {
                   {/* <Avatar variant="rounded" alt={column.name} src={img} className={classes.small} /> */}
                 </ListItemIcon>
                 <ListItemText primary={column.name} className={classes.title} classes={{primary:classes.listItemText}}/>
+                {/* <Search /> */}
                 {open ? <ExpandLess /> : <ExpandMore />}
               </ListItem>
               {/* <Collapse in={open} timeout="auto" unmountOnExit className={classes.ItemList_wrap}> */}

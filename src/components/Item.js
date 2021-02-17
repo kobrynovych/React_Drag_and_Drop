@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useRef} from "react";
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 
@@ -28,14 +28,15 @@ const getStyle = ({ draggableStyle, virtualStyle, isDragging }) => {
     const result = {
       ...combined,
       // height: isDragging ? combined.height : combined.height - (grid*3),
-      height: isDragging ? combined.height : combined.height - (grid),
-      left: isDragging ? combined.left : combined.left + grid,
-      width: isDragging
-        ? draggableStyle.width
-        : `calc(${combined.width} - ${grid * 3}px)`,
+      // height: isDragging ? combined.height : combined.height - (grid),
+      // left: isDragging ? combined.left : combined.left + grid,
+      // width: isDragging
+      //   ? draggableStyle.width
+      //   : `calc(${combined.width} - ${grid * 3}px)`,
+
+      // left: isDragging ? combined.left : combined.left,
       // marginBottom: grid,
-      
-      marginBottom: `${grid}px`,
+      // marginBottom: `${grid}px`,
 
       // backgroundColor: '#aaa',
       // backgroundColor: 'lightgrey',
@@ -46,7 +47,7 @@ const getStyle = ({ draggableStyle, virtualStyle, isDragging }) => {
       
       // border: '1px solid lightblue',
       // boxShadow: '2px 2px #aaa',
-      boxShadow: '0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%)',
+      // boxShadow: '0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%)',
       
 
       // paddingRight: '0px',
@@ -66,24 +67,25 @@ const Item = ({ provided, item, style, isDragging, index = ''}) => {
   // debugger
   const classes = useStyles();
   // debugger
-  const options = [
-    `id: ${item.id}`,
-    `name: ${item.name}`,
-    `groupId: ${item.groupId}`,
-    `groupName: ${item.groupName}`,
-  ];
 
 
-  const [anchorEl, setAnchorEl] = useState(null);
-  const open = Boolean(anchorEl);
+  // const options = [
+  //   `id: ${item.id}`,
+  //   `name: ${item.name}`,
+  //   `groupId: ${item.groupId}`,
+  //   `groupName: ${item.groupName}`,
+  // ];
 
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
+  // const [anchorEl, setAnchorEl] = useState(null);
+  // const open = Boolean(anchorEl);
 
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
+  // const handleClick = (event) => {
+  //   setAnchorEl(event.currentTarget);
+  // };
+
+  // const handleClose = () => {
+  //   setAnchorEl(null);
+  // };
 
     return (
         <ListItem button divider 
@@ -103,7 +105,7 @@ const Item = ({ provided, item, style, isDragging, index = ''}) => {
 
           <ListItemText primary={item.name} secondary={item.groupName}/>
 
-          <IconButton 
+          {/* <IconButton 
             edge="end" 
             color="inherit"
             aria-label="more"
@@ -119,6 +121,7 @@ const Item = ({ provided, item, style, isDragging, index = ''}) => {
             keepMounted
             open={open}
             onClose={handleClose}
+            ref={menu}
             PaperProps={{
               style: {
                 maxHeight: ITEM_HEIGHT * 4.5,
@@ -131,7 +134,7 @@ const Item = ({ provided, item, style, isDragging, index = ''}) => {
                 {option}
               </MenuItem>
             ))}
-          </Menu>
+          </Menu> */}
         </ListItem>
     );
   }
