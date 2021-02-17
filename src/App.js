@@ -10,7 +10,6 @@ function App() {
   const [state, setState] = useState(() => getInitialData());
   const [newProductId, setNewProductId] = useState(null);
   const [newGroupId, setNewGroupId] = useState(null);
-  // debugger
   // const myArray = Object.values(state.columns).map(el => el.items).flat();
   // const myArray2 = myArray.map(el => ({id: Number(el.id), name: el.name, groupId: el.groupId, groupName: el.groupName}));
   // const myArray3 = myArray2.sort((a, b) => a.id - b.id);
@@ -83,7 +82,6 @@ function App() {
     const destinationColumn = state.columns[result.destination.droppableId];
     const item = sourceColumn.items[result.source.index];
 
-    // kim
     item.groupId = destinationColumn.id0;     // kim rename
     item.groupName = destinationColumn.id;    // kim rename
 
@@ -99,7 +97,7 @@ function App() {
       ...destinationColumn,
       items: [...destinationColumn.items]
     };
-    // in line modification of items
+
     // newDestinationColumn.items.splice(result.destination.index, 0, item);
     newDestinationColumn.items.splice(0, 0, item);   // kim order 0
 
@@ -111,35 +109,22 @@ function App() {
         [newDestinationColumn.id]: newDestinationColumn
       }
     };
-// debugger
+
     setState(newState);
     setNewProductId(Number(item.id));
     setNewGroupId(newDestinationColumn.id0);
   }
 
-  // kim2 vibro
-  const onDragStart = () => {
-    if (window.navigator.vibrate) {
-      window.navigator.vibrate(100);
-    }
-  };
-
-  // provided
-  //   droppableProps:
-  //     data-rbd-droppable-context-id: "1"
   return (
-    <DragDropContext onDragEnd={onDragEnd} onDragStart={onDragStart} >
+    <DragDropContext onDragEnd={onDragEnd}>
       <div className="app">
         <div className="columns_wrap">
           <div>
             <Droppable
               droppableId="all-droppables1"
-              // direction="horizontal"
-              // direction="vertical"
               type="column"
             >
               {(provided, snapshot) => {
-                // debugger
                 return (
                 <div
                   className="columns"
@@ -148,7 +133,6 @@ function App() {
                 >
                   {state.columnOrder.map((columnId, index) => (<React.Fragment key={columnId}>
                     {columnId === 'разное' && (<Column
-                        // key={columnId}
                         columnId={columnId}
                         column={state.columns[columnId]}
                         index={index}
@@ -161,12 +145,9 @@ function App() {
           </div>
         <Droppable
           droppableId="all-droppables"
-          // direction="horizontal"
-          // direction="vertical"
           type="column"
         >
           {(provided, snapshot) => {
-            // debugger
             return (
             <div
               className="columns"
@@ -175,7 +156,6 @@ function App() {
             >
               {state.columnOrder.map((columnId, index) => (<React.Fragment key={columnId}>
                 {columnId !== 'разное' && (<Column
-                  // key={columnId}
                   column={state.columns[columnId]}
                   index={index}
                 />)}</React.Fragment>
