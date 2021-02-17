@@ -10,31 +10,42 @@ function App() {
   const [state, setState] = useState(() => getInitialData());
   const [newProductId, setNewProductId] = useState(null);
   const [newGroupId, setNewGroupId] = useState(null);
+  const [isPending, setIsPending] = useState(false);
+  const [error, setError] = useState('');
+  
   // const myArray = Object.values(state.columns).map(el => el.items).flat();
   // const myArray2 = myArray.map(el => ({id: Number(el.id), name: el.name, groupId: el.groupId, groupName: el.groupName}));
   // const myArray3 = myArray2.sort((a, b) => a.id - b.id);
   // console.log(myArray3);
 
   // useEffect(async () => {
-  //   debugger
   //   if (newProductId && newGroupId) {
-  //     const api = 'https://helper-pepper.com/api/';
+  //     const url = 'https://helper-pepper.com/api/';
   //     const id = 'asd';
+  //     setIsPending(true);
+
   //     try {
-  //       const response = await axios.put(`${api}product/${newProductId}/group/${newGroupId}/${id}`, 
-  //         {"body":data}, 
+  //       const response = await axios.put(`${url}product/${newProductId}/group/${newGroupId}/${id}`, 
+  //         {},           // {"body":data}, 
   //         {
   //           headers: {
   //            'Content-Type': 'application/json'
   //         },
   //       });
+
   //       console.log(response);
+  //       setNewProductId(null);
+  //       setNewGroupId(null);
+
   //     } catch (error) {
   //       // console.log(error.response.data.error);
+  //       setError(error);
   //       console.error(error);
   //     }
+
+  //     setIsPending(false);
   //   }
-  // }, [newProductId, newGroupId])
+  // }, [newProductId, newGroupId]);
   
   function onDragEnd(result) {
     if (!result.destination) {

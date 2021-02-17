@@ -4,8 +4,9 @@ import { Droppable } from "react-beautiful-dnd";
 import Item from './Item';
 import Row from './Row';
 
-const ItemListApp = React.memo(function ItemList({ column, index, open, setIsHover }) {
+const ItemListApp = React.memo(function ItemList({ column, index, open, titleWrqpRef }) {
     const listRef = useRef();
+
     useLayoutEffect(() => {
       const list = listRef.current;
       if (list) {
@@ -14,11 +15,12 @@ const ItemListApp = React.memo(function ItemList({ column, index, open, setIsHov
     }, [index]);
 
     const getListStyle = (isDraggingOver) => {
-      if (!open && isDraggingOver) {
-        setIsHover(false);
+      
+      if (!open && isDraggingOver && titleWrqpRef.current) {
+        titleWrqpRef.current.style.backgroundColor = '#bbb';
       }
-      if (!open && !isDraggingOver) {
-        setIsHover(true);
+      if (!open && !isDraggingOver && titleWrqpRef.current) {
+        titleWrqpRef.current.style.backgroundColor = open ? '#f5f5f5' : '#ddd';
       }
 
       return {
@@ -26,7 +28,7 @@ const ItemListApp = React.memo(function ItemList({ column, index, open, setIsHov
         background: open ? isDraggingOver ? '#bbb' : '#f5f5f5' : isDraggingOver ? '#bbb' : 'transparent',  
         width: !open && '1%',
         left: !open && '40%',
-        top: !open && '-45px',
+        top: !open && '-50px',
         opacity: !open && '0',
       }
     };
