@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/React_Drag_and_Drop/static/css/main.fda0ec38.chunk.css",
-    "main.js": "/React_Drag_and_Drop/static/js/main.018b9242.chunk.js",
-    "main.js.map": "/React_Drag_and_Drop/static/js/main.018b9242.chunk.js.map",
-    "runtime-main.js": "/React_Drag_and_Drop/static/js/runtime-main.92575ec6.js",
-    "runtime-main.js.map": "/React_Drag_and_Drop/static/js/runtime-main.92575ec6.js.map",
-    "static/js/2.8d23c244.chunk.js": "/React_Drag_and_Drop/static/js/2.8d23c244.chunk.js",
-    "static/js/2.8d23c244.chunk.js.map": "/React_Drag_and_Drop/static/js/2.8d23c244.chunk.js.map",
-    "static/js/3.bfacba0f.chunk.js": "/React_Drag_and_Drop/static/js/3.bfacba0f.chunk.js",
-    "static/js/3.bfacba0f.chunk.js.map": "/React_Drag_and_Drop/static/js/3.bfacba0f.chunk.js.map",
+    "main.css": "/React_Drag_and_Drop/static/css/main.c6cdd010.chunk.css",
+    "main.js": "/React_Drag_and_Drop/static/js/main.5e49a225.chunk.js",
+    "main.js.map": "/React_Drag_and_Drop/static/js/main.5e49a225.chunk.js.map",
+    "runtime-main.js": "/React_Drag_and_Drop/static/js/runtime-main.15cd1afe.js",
+    "runtime-main.js.map": "/React_Drag_and_Drop/static/js/runtime-main.15cd1afe.js.map",
+    "static/js/2.318e710b.chunk.js": "/React_Drag_and_Drop/static/js/2.318e710b.chunk.js",
+    "static/js/2.318e710b.chunk.js.map": "/React_Drag_and_Drop/static/js/2.318e710b.chunk.js.map",
+    "static/js/3.a42a61bf.chunk.js": "/React_Drag_and_Drop/static/js/3.a42a61bf.chunk.js",
+    "static/js/3.a42a61bf.chunk.js.map": "/React_Drag_and_Drop/static/js/3.a42a61bf.chunk.js.map",
     "index.html": "/React_Drag_and_Drop/index.html",
-    "static/css/main.fda0ec38.chunk.css.map": "/React_Drag_and_Drop/static/css/main.fda0ec38.chunk.css.map",
-    "static/js/2.8d23c244.chunk.js.LICENSE.txt": "/React_Drag_and_Drop/static/js/2.8d23c244.chunk.js.LICENSE.txt"
+    "static/css/main.c6cdd010.chunk.css.map": "/React_Drag_and_Drop/static/css/main.c6cdd010.chunk.css.map",
+    "static/js/2.318e710b.chunk.js.LICENSE.txt": "/React_Drag_and_Drop/static/js/2.318e710b.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.92575ec6.js",
-    "static/js/2.8d23c244.chunk.js",
-    "static/css/main.fda0ec38.chunk.css",
-    "static/js/main.018b9242.chunk.js"
+    "static/js/runtime-main.15cd1afe.js",
+    "static/js/2.318e710b.chunk.js",
+    "static/css/main.c6cdd010.chunk.css",
+    "static/js/main.5e49a225.chunk.js"
   ]
 }
