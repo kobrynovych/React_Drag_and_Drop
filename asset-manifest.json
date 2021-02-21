@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/React_Drag_and_Drop/static/css/main.6677d9f8.chunk.css",
-    "main.js": "/React_Drag_and_Drop/static/js/main.5d6ce24d.chunk.js",
-    "main.js.map": "/React_Drag_and_Drop/static/js/main.5d6ce24d.chunk.js.map",
+    "main.css": "/React_Drag_and_Drop/static/css/main.7ec2dfc9.chunk.css",
+    "main.js": "/React_Drag_and_Drop/static/js/main.6b63f5a8.chunk.js",
+    "main.js.map": "/React_Drag_and_Drop/static/js/main.6b63f5a8.chunk.js.map",
     "runtime-main.js": "/React_Drag_and_Drop/static/js/runtime-main.15cd1afe.js",
     "runtime-main.js.map": "/React_Drag_and_Drop/static/js/runtime-main.15cd1afe.js.map",
     "static/js/2.9437297d.chunk.js": "/React_Drag_and_Drop/static/js/2.9437297d.chunk.js",
@@ -10,13 +10,13 @@
     "static/js/3.a42a61bf.chunk.js": "/React_Drag_and_Drop/static/js/3.a42a61bf.chunk.js",
     "static/js/3.a42a61bf.chunk.js.map": "/React_Drag_and_Drop/static/js/3.a42a61bf.chunk.js.map",
     "index.html": "/React_Drag_and_Drop/index.html",
-    "static/css/main.6677d9f8.chunk.css.map": "/React_Drag_and_Drop/static/css/main.6677d9f8.chunk.css.map",
+    "static/css/main.7ec2dfc9.chunk.css.map": "/React_Drag_and_Drop/static/css/main.7ec2dfc9.chunk.css.map",
     "static/js/2.9437297d.chunk.js.LICENSE.txt": "/React_Drag_and_Drop/static/js/2.9437297d.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.15cd1afe.js",
     "static/js/2.9437297d.chunk.js",
-    "static/css/main.6677d9f8.chunk.css",
-    "static/js/main.5d6ce24d.chunk.js"
+    "static/css/main.7ec2dfc9.chunk.css",
+    "static/js/main.6b63f5a8.chunk.js"
   ]
 }
