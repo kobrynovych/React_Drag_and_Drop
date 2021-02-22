@@ -14,11 +14,17 @@ import ItemListApp from './ItemList';
 const useStyles = makeStyles((theme) => ({
   column: {
     margin: '3px',
+    marginBottom: '0px',
+    marginTop: '0px',
+    backgroundColor: 'rgb(221, 221, 221)',
   },
   title__wrap: {
     border: '1px solid #ddd',
-    padding: '15px',
+    borderTop: '3px solid #fff',
+    borderBottom: '0',
+    padding: '25px 15px',
     transition: 'background .4s',
+    transition: 'boxShadow .4s',
     '&:hover': { opacity: '.9' },
   },
   listItemText: {              
@@ -61,9 +67,11 @@ const Column = React.memo(function Column({ column, index, columnId = null }) {
     const openStart = columnId === 'разное' ? true : false;
     const [open, setOpen] = useState(openStart);
     const titleWrqpRef = useRef();
-  
-    const handleClick = () => {
-      setOpen(!open);
+    
+    const handleClick = (id = null) => {
+      if (id !== "разное") {
+        setOpen(!open);
+      }
     };
 
     const getListStyle = (isDraggingOver) => {
@@ -81,29 +89,29 @@ const Column = React.memo(function Column({ column, index, columnId = null }) {
             {...provided.draggableProps}
             ref={provided.innerRef}
           >
-              <ListItem button 
-                onClick={handleClick} 
-                {...provided.dragHandleProps} 
-                className={classes.title__wrap}
-                style={getListStyle(snapshot.isDragging)}
-                ref={titleWrqpRef}
-              >
-                <ListItemIcon className={classes.icon}>
-                  {column.items.length > 0 && <p className={classes.lengthGroup}>{column.items.length}</p>}
-                  <AddShoppingCartIcon />
-                  {/* <Avatar variant="rounded" alt={column.name} src={column.img} className={classes.small} /> */}
-                </ListItemIcon>
-                <ListItemText primary={column.name} className={classes.title} classes={{primary:classes.listItemText}}/>
-                {open ? <ExpandLess /> : <ExpandMore />}
-              </ListItem>
-              <div className={classes.ItemList_wrap} >
-                <ListMaterialUI component="div" disablePadding className={classes.ItemList_wrap2} style={{height: !open && '0px', paddingTop: open && '3px'}}>
-                    <ItemListApp column={column} index={index} 
-                      open={open}
-                      titleWrqpRef={titleWrqpRef}
-                    />
-                </ListMaterialUI>
-              </div>
+            <ListItem button 
+              onClick={() => handleClick(column.id)} 
+              {...provided.dragHandleProps} 
+              className={classes.title__wrap}
+              style={getListStyle(snapshot.isDragging)}
+              ref={titleWrqpRef}
+            >
+              <ListItemIcon className={classes.icon}>
+                {column.items.length > 0 && <p className={classes.lengthGroup}>{column.items.length}</p>}
+                <AddShoppingCartIcon />
+                {/* <Avatar variant="rounded" alt={column.name} src={column.img} className={classes.small} /> */}
+              </ListItemIcon>
+              <ListItemText primary={column.name} className={classes.title} classes={{primary:classes.listItemText}}/>
+              {column.id !== "разное" && (open ? <ExpandLess /> : <ExpandMore />)}
+            </ListItem>
+            <div className={classes.ItemList_wrap} >
+              <ListMaterialUI component="div" disablePadding className={classes.ItemList_wrap2} style={{height: !open && '0px', paddingTop: open && '3px'}}>
+                  <ItemListApp column={column} index={index} 
+                    open={open}
+                    titleWrqpRef={titleWrqpRef}
+                  />
+              </ListMaterialUI>
+            </div>
           </div>
           )}}
       </Draggable>
