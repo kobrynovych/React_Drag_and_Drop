@@ -3,7 +3,7 @@
 Drag and Drop...
 
 Demo
-https://igorkob.github.io/React_Drag_and_Drop
+https://kobrynovych.github.io/React_Drag_and_Drop
 
 ## Table of contents
 * [Instructions](#Instructions)
@@ -15,7 +15,7 @@ https://igorkob.github.io/React_Drag_and_Drop
 
 First clone this repository.
 ```bash
-$ git clone https://github.com/IgorKob/React_Drag_and_Drop.git
+$ git clone https://github.com/kobrynovych/React_Drag_and_Drop.git
 ```
 
 Install dependencies. Make sure you already have [`nodejs`](https://nodejs.org/en/) & [`npm`](https://www.npmjs.com/) installed in your system.
